@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register and Login</h1>
+
+    <!-- Registration Form -->
+    <form id="registerForm">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" id="register">Register</button>
+    </form>
+
+    <!-- Login Form -->
+    <form id="loginForm" style="margin-top: 30px;">
+        <input type="email" id="loginEmail" placeholder="Email" required><br>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Logout Button -->
+    <button id="logoutBtn" style="display:none;">Logout</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAcA9x_xsULkxha2dPtcN0rmm7JXxobxYY",
+          authDomain: "fir-login-9ca20.firebaseapp.com",
+          databaseURL: "https://fir-login-9ca20-default-rtdb.firebaseio.com",
+          projectId: "fir-login-9ca20",
+          storageBucket: "fir-login-9ca20.appspot.com",
+          messagingSenderId: "1068302452689",
+          appId: "1:1068302452689:web:44b280dbafc7efafe0c2f0"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        registerForm.addEventListener("submit", (e) => {
+            
+  const email = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+
+      createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      alert("user created!");
+    })
+    .catch((error) => {
+      const errorcode = error.code;
+      const errorMessage = error.message;
+
+     alert(errorMessage);
+    //   console.log(errorMessage);
+    });
+});
+      </script>
+</body>
+</html>
